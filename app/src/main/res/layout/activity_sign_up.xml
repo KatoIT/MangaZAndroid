@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SignUpActivity">
+
+    <EditText
+        android:id="@+id/editTextUserNameOnSignUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="75dp"
+        android:ems="10"
+        android:hint="Tên đăng nhập"
+        android:inputType="textPersonName"
+        android:paddingStart="15dp"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="@+id/textView"
+        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <EditText
+        android:id="@+id/editTextPasswordOnSignUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="Mật khẩu"
+        android:inputType="textPassword"
+        android:paddingStart="15dp"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="@+id/editTextUserNameOnSignUp"
+        app:layout_constraintTop_toBottomOf="@+id/editTextUserNameOnSignUp" />
+
+    <EditText
+        android:id="@+id/editTextNickNameOnSignUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="Tên người dùng"
+        android:inputType="textPersonName"
+        android:paddingStart="15dp"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="@+id/editTextPassword2OnSignUp"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPassword2OnSignUp" />
+
+    <EditText
+        android:id="@+id/editTextAgeOnSignUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="21dp"
+        android:ems="10"
+        android:hint="Tuối"
+        android:inputType="numberSigned"
+        android:paddingStart="15dp"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="@+id/editTextNickNameOnSignUp"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNickNameOnSignUp" />
+
+    <EditText
+        android:id="@+id/editTextPassword2OnSignUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="21dp"
+        android:ems="10"
+        android:hint="Nhập lại mật khẩu"
+        android:inputType="textPassword"
+        android:paddingStart="15dp"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="@+id/editTextPasswordOnSignUp"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPasswordOnSignUp" />
+
+    <Button
+        android:id="@+id/buttonSignUp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Tạo"
+        app:layout_constraintEnd_toEndOf="@+id/editTextAgeOnSignUp"
+        app:layout_constraintStart_toStartOf="@+id/editTextAgeOnSignUp"
+        app:layout_constraintTop_toBottomOf="@+id/textViewValidSignUp" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:text="Tạo tài khoản mới"
+        android:textColor="@color/light_sky_blue"
+        android:textSize="35dp"
+        android:textStyle="italic|bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewValidSignUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textSize="18dp"
+        android:textColor="@color/red"
+        app:layout_constraintEnd_toEndOf="@+id/editTextAgeOnSignUp"
+        app:layout_constraintStart_toStartOf="@+id/editTextAgeOnSignUp"
+        app:layout_constraintTop_toBottomOf="@+id/editTextAgeOnSignUp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

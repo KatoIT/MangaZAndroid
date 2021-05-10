@@ -6,7 +6,8 @@ CREATE TABLE IF NOT EXISTS Users (
     Age INTEGER, -- tuổi
     Level INTEGER, -- cấp độ
     UrlImage TEXT, -- Đường dẫn ảnh
-    Avatar BLOG -- ảnh đại diện
+    Avatar BLOG, -- ảnh đại diện
+    IsAdmin BOOLEAN -- Admin
 );
 /*2 Bảng Theo dõi */
 CREATE TABLE IF NOT EXISTS Follow (
