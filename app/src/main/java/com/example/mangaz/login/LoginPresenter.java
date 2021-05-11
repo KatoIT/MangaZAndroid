@@ -1,9 +1,18 @@
-package com.example.mangaz;
+/*
+ * Coder: Nguyen Van An
+ * Date: 7-5-2021
+ * Content: Xử lý đăng nhập
+ *
+ *
+ * */
+package com.example.mangaz.login;
 
 import android.content.Context;
 import android.database.Cursor;
 
-import com.example.mangaz.Model.Users;
+import com.example.mangaz.Database;
+import com.example.mangaz.MD5;
+import com.example.mangaz.User.Users;
 
 public class LoginPresenter {
     private final LoginInterface mLoginInterface;

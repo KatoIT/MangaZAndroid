@@ -1,4 +1,11 @@
-package com.example.mangaz;
+/*
+ * Coder: Nguyen Van An
+ * Date: 7-5-2021
+ * Content: Xử lý đăng nhập
+ *
+ *
+ * */
+package com.example.mangaz.login;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,7 +17,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.mangaz.Model.Users;
+import com.example.mangaz.R;
+import com.example.mangaz.signup.SignUpActivity;
+import com.example.mangaz.User.Users;
 
 public class LoginActivity extends AppCompatActivity implements LoginInterface {
     private Button buttonLogin, buttonLoginToSignUp;

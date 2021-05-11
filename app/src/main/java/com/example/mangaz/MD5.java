@@ -1,3 +1,11 @@
+/*
+ * Coder: Nguyen Van An
+ * Date: 6-5-2021
+ * Content: Mã hóa mật khẩu 1 chiều (MD5)
+ *
+ *
+ *
+ * */
 package com.example.mangaz;
 
 import java.math.BigInteger;

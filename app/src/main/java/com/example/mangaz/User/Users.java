@@ -1,11 +1,17 @@
-package com.example.mangaz.Model;
+/*
+ * Coder: Nguyen Van An
+ * Date: 6-5-2021
+ * Content: Đối tượng User
+ *      + Check Valid UserName, Age, Password
+ *
+ *
+ * */
+package com.example.mangaz.User;
 
 import android.graphics.Bitmap;
 import android.text.TextUtils;
 
 public class Users {
-
-
     private String UserName;
     private String PassWord;
     private String Nickname;

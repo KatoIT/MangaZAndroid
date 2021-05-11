@@ -1,10 +1,17 @@
-package com.example.mangaz;
+/*
+ * Coder: Nguyen Van An
+ * Date: 8-5-2021
+ * Content: Xử lý trang đăng ký
+ *
+ *
+ * */
+package com.example.mangaz.signup;
 
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 
-import com.example.mangaz.Model.Users;
+import com.example.mangaz.Database;
+import com.example.mangaz.User.Users;
 
 public class SignUpPresenter {
     private SignUpInterface mSignUpInterface;

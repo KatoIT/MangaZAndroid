@@ -1,3 +1,10 @@
+/*
+ * Coder: Nguyen Van An
+ * Date: 5-5-2021
+ * Content: Tạo Database
+ *
+ *
+ * */
 package com.example.mangaz;
 
 import android.content.Context;
@@ -5,15 +12,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.example.mangaz.Model.Users;
-
-
 public class Database extends SQLiteOpenHelper {
-    /*
-     * By Nguyen Van An
-     *
-     *
-     * */
+
     private static final String DATABASENAME = "data.sqlite";
     private static final int VERSION = 1;
     private SQLiteDatabase DB;
@@ -117,7 +117,6 @@ public class Database extends SQLiteOpenHelper {
                 "    FOREIGN KEY (User_UserName) REFERENCES Users(UserName), " +// Người Tương tác Chap
                 "    FOREIGN KEY (Chapter_IdChapter) REFERENCES Chapter(IdChapter) " +// id Chapter
                 ")");
-
     }
 
     @Override
@@ -142,24 +141,5 @@ public class Database extends SQLiteOpenHelper {
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
         sqLiteDatabase.execSQL("DELETE FROM " + tableName + " WHERE " + where + ";");
     }
-
-
-    // CREATE Table
-//        database.QueryData("CREATE TABLE IF NOT EXISTS User(Id NVARCHAR(25) PRIMARY KEY, UserName NVARCHAR(255), PhoneNumber NVARCHAR(25))");
-    // Insert Data
-//        try {
-//            database.QueryData("INSERT INTO User VALUES(0,'Nguyen Van An', '0987191143')");
-//            database.QueryData("INSERT INTO User VALUES(1,'Nguyen Van B', '0987191143')");
-//            database.QueryData("INSERT INTO User VALUES(2,'Nguyen Van C', '0987191143')");
-//            database.QueryData("INSERT INTO User VALUES(3,'Nguyen Van D', '0987191143')");
-//            database.QueryData("INSERT INTO User VALUES(4,'Nguyen Van E', '0987191143')");
-//            database.QueryData("INSERT INTO User VALUES(5,'Nguyen Van F', '0987191143')");
-//            database.QueryData("INSERT INTO User VALUES(6,'Nguyen Van G', '0987191143')");
-//            database.QueryData("INSERT INTO User VALUES(7,'Nguyen Van H', '0987191143')");
-//            database.QueryData("INSERT INTO User VALUES(8,'Nguyen Van I', '0987191143')");
-//            database.QueryData("INSERT INTO User VALUES(9,'Nguyen Van K', '0987191143')");
-//        } catch (Exception e) {
-//            Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-//        }
 
 }
