@@ -12,12 +12,16 @@ import android.database.Cursor;
 
 import com.example.mangaz.Database;
 import com.example.mangaz.MD5;
+import com.example.mangaz.MangaZSharedPreferences;
 import com.example.mangaz.User.Users;
+import com.example.mangaz.VarFinal;
 
 public class LoginPresenter {
     private final LoginInterface mLoginInterface;
     private final Context mContext;
     private MD5 md5 = new MD5();
+    private MangaZSharedPreferences mSharedPreferences;
+    private VarFinal mVarFinal = new VarFinal();
 
     public LoginPresenter(LoginInterface mLoginInterface, Context mContext) {
         this.mLoginInterface = mLoginInterface;
@@ -47,6 +51,11 @@ public class LoginPresenter {
             cursor.moveToFirst();
             String strUserName = cursor.getString(0);
             String strPassword = cursor.getString(1);
+            if (strUserName.equals(user.getUserName()) && strPassword.equals(user.getPassWord())){
+                mSharedPreferences = new MangaZSharedPreferences(mContext);
+                mSharedPreferences.putStringValue(mVarFinal.ACCOUNT, strUserName);
+                mSharedPreferences.putStringValue(mVarFinal.PASSWORD, strPassword);
+            }
             return strUserName.equals(user.getUserName()) && strPassword.equals(user.getPassWord());
         } catch (Exception e) {
             mLoginInterface.LoginError(e.getMessage());

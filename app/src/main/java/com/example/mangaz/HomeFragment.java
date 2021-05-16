@@ -18,6 +18,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -45,15 +46,24 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(Manga manga) {
                 Toast.makeText(getActivity(), manga.getMangaName(), Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getActivity(), LoginActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(getActivity(), LoginActivity.class);
+//                startActivity(intent);
 
             }
+
+            @Override
+            public void onClickImageButton() {
+//                Toast.makeText(getActivity(), "Search", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getActivity(), SearchActivity.class);
+                startActivity(intent);
+            }
+
         });
         // set recyclerViewHomeFragment
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false);
         recyclerViewHomeFragment.setLayoutManager(linearLayoutManager);
-
+        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL);
+        recyclerViewHomeFragment.addItemDecoration(itemDecoration);
         nominationAdapter.setData(getListNomination());
         recyclerViewHomeFragment.setAdapter(nominationAdapter);
 
@@ -63,22 +73,51 @@ public class HomeFragment extends Fragment {
 
     private List<Nomination> getListNomination() { // truyền dữ liệu vào RecyclerView
         List<Nomination> listNominations = new ArrayList<>();
+        //
         List<Manga> mangaList = new ArrayList<>();
-        mangaList.add(new Manga("Manga 1", true, ""));
-        mangaList.add(new Manga("Manga 2", true, ""));
-        mangaList.add(new Manga("Manga 3", true, ""));
-        mangaList.add(new Manga("Manga 4", true, ""));
-        mangaList.add(new Manga("Manga 5", true, ""));
-        mangaList.add(new Manga("Manga 6", true, ""));
+        mangaList.add(new Manga("Dục hỏa độc nữ", "" + R.drawable.img_duc_hoa_doc_nu));
+        mangaList.add(new Manga("Người tôi yêu là chàng trai nào", "" + R.drawable.img_nguoi_toi_yeu_la_chang_trai_nao));
+        mangaList.add(new Manga("Chử thiên ký", "" + R.drawable.img_chu_thien_ky));
+        mangaList.add(new Manga("Ta lượm được thuộc tính ở mạt thế", "" + R.drawable.img_ta_luom_duoc_thuoc_tinh_o_mat_the));
+        mangaList.add(new Manga("Vương gia què", "" + R.drawable.img_vuong_gia_que));
+        //
+        List<Manga> mangaList1 = new ArrayList<>();
+        mangaList1.add(new Manga("Người tôi yêu là chàng trai nào", "" + R.drawable.img_nguoi_toi_yeu_la_chang_trai_nao));
+        mangaList1.add(new Manga("Chử thiên ký", "" + R.drawable.img_chu_thien_ky));
+        mangaList1.add(new Manga("Ta lượm được thuộc tính ở mạt thế", "" + R.drawable.img_ta_luom_duoc_thuoc_tinh_o_mat_the));
+        mangaList1.add(new Manga("Dục hỏa độc nữ", "" + R.drawable.img_duc_hoa_doc_nu));
+        mangaList1.add(new Manga("Vương gia què", "" + R.drawable.img_vuong_gia_que));
+        //
+        List<Manga> mangaList2 = new ArrayList<>();
+        mangaList2.add(new Manga("Chử thiên ký", "" + R.drawable.img_chu_thien_ky));
+        mangaList2.add(new Manga("Ta lượm được thuộc tính ở mạt thế", "" + R.drawable.img_ta_luom_duoc_thuoc_tinh_o_mat_the));
+        mangaList2.add(new Manga("Vương gia què", "" + R.drawable.img_vuong_gia_que));
+        mangaList2.add(new Manga("Dục hỏa độc nữ", "" + R.drawable.img_duc_hoa_doc_nu));
+        mangaList2.add(new Manga("Người tôi yêu là chàng trai nào", "" + R.drawable.img_nguoi_toi_yeu_la_chang_trai_nao));
+        //
+        List<Manga> mangaList3 = new ArrayList<>();
 
-        listNominations.add(new Nomination(mangaList, "Mới cập nhật"));
-        listNominations.add(new Nomination(mangaList, "Hot"));
-        listNominations.add(new Nomination(mangaList, "Top tuần"));
-        listNominations.add(new Nomination(mangaList, "Top tháng"));
-        listNominations.add(new Nomination(mangaList, "Top lượt xem"));
-        listNominations.add(new Nomination(mangaList, "Đề cử 6"));
-        listNominations.add(new Nomination(mangaList, "Đề cử 7"));
-        listNominations.add(new Nomination(mangaList, "Đề cử 8"));
+        mangaList3.add(new Manga("Ta lượm được thuộc tính ở mạt thế", "" + R.drawable.img_ta_luom_duoc_thuoc_tinh_o_mat_the));
+        mangaList3.add(new Manga("Vương gia què", "" + R.drawable.img_vuong_gia_que));
+        mangaList3.add(new Manga("Người tôi yêu là chàng trai nào", "" + R.drawable.img_nguoi_toi_yeu_la_chang_trai_nao));
+        mangaList3.add(new Manga("Dục hỏa độc nữ", "" + R.drawable.img_duc_hoa_doc_nu));
+        mangaList3.add(new Manga("Chử thiên ký", "" + R.drawable.img_chu_thien_ky));
+        //
+        List<Manga> mangaList4 = new ArrayList<>();
+
+        mangaList4.add(new Manga("Vương gia què", "" + R.drawable.img_vuong_gia_que));
+        mangaList4.add(new Manga("Người tôi yêu là chàng trai nào", "" + R.drawable.img_nguoi_toi_yeu_la_chang_trai_nao));
+        mangaList4.add(new Manga("Chử thiên ký", "" + R.drawable.img_chu_thien_ky));
+        mangaList4.add(new Manga("Ta lượm được thuộc tính ở mạt thế", "" + R.drawable.img_ta_luom_duoc_thuoc_tinh_o_mat_the));
+        mangaList4.add(new Manga("Dục hỏa độc nữ", "" + R.drawable.img_duc_hoa_doc_nu));
+
+
+        listNominations.add(new Nomination(mangaList, "Mới cập nhật", 2));
+        listNominations.add(new Nomination(mangaList1, "Mới cập nhật", 1));
+        listNominations.add(new Nomination(mangaList2, "Hot", 1));
+        listNominations.add(new Nomination(mangaList3, "Top tuần", 1));
+        listNominations.add(new Nomination(mangaList4, "Top tháng", 1));
+        listNominations.add(new Nomination(mangaList, "Top lượt xem", 1));
         return listNominations;
     }
 

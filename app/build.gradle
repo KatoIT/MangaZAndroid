@@ -42,9 +42,11 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-    // Recyclerview
+    // Recycler View
     implementation "androidx.recyclerview:recyclerview:1.2.0"
-    // Cardview
+    // Card View
     implementation "androidx.cardview:cardview:1.0.0"
+    // Slider View
+    implementation 'com.github.smarteist:autoimageslider:1.4.0'
 
 }

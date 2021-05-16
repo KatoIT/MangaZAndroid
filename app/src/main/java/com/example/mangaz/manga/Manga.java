@@ -17,7 +17,9 @@ public class Manga {
     private Boolean Accept;
     private String UrlImage;
     private Bitmap Avatar;
-    private Integer Type;
+    private String listCategory;
+    private Integer countChapter;
+
 
     public Manga(String mangaName, String author, Boolean isManga, String introduce, Boolean accept, String urlImage, Bitmap avatar) {
         MangaName = mangaName;
@@ -29,17 +31,16 @@ public class Manga {
         Avatar = avatar;
     }
 
-    public Manga(String mangaName, Boolean accept, String urlImage) {
+    public Manga(String mangaName, String urlImage) {
         MangaName = mangaName;
-        Accept = accept;
         UrlImage = urlImage;
     }
 
-    public Manga(String mangaName, Boolean accept, String urlImage, Integer type) {
+    public Manga(String mangaName, String urlImage, String listCategory, Integer countChapter) {
         MangaName = mangaName;
-        Accept = accept;
         UrlImage = urlImage;
-        Type = type;
+        this.listCategory = listCategory;
+        this.countChapter = countChapter;
     }
 
     public String getMangaName() {
@@ -96,5 +97,21 @@ public class Manga {
 
     public void setAvatar(Bitmap avatar) {
         Avatar = avatar;
+    }
+
+    public String getListCategory() {
+        return listCategory;
+    }
+
+    public void setListCategory(String listCategory) {
+        this.listCategory = listCategory;
+    }
+
+    public Integer getCountChapter() {
+        return countChapter;
+    }
+
+    public void setCountChapter(Integer countChapter) {
+        this.countChapter = countChapter;
     }
 }

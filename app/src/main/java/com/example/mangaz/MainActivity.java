@@ -70,10 +70,10 @@ public class MainActivity extends AppCompatActivity {
             super.onBackPressed();
             return;
         } else {
-            toast = Toast.makeText(MainActivity.this, "Nhấp Back 1 lần nữa để thoát", Toast.LENGTH_SHORT);
+            toast = Toast.makeText(MainActivity.this, "Nhấp Back 1 lần nữa để thoát ", Toast.LENGTH_SHORT);
+            //  + R.drawable.image_tien_de_tro_ve + " "+ R.drawable.image_dau_la_dai_luc + " "+ R.drawable.image_tan_the_nguoi_tran + " "+ R.drawable.image_wechat_cua_toi_lien_ket_tam_gioi + " "+ R.drawable.image_nhat_hoa_khoi_ve_lam_vo + " "+ R.drawable.image_tong_tai_tai_thuong + " "
             toast.show();
         }
         backPressTime = System.currentTimeMillis();
     }
-
 }

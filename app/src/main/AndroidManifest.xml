@@ -9,12 +9,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MangaZ">
-        <activity android:name=".signup.SignUpActivity"></activity>
+        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".SearchActivity" />
+        <activity android:name=".signup.SignUpActivity" />
         <activity
             android:name=".login.LoginActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".MainActivity"
+            android:name=".SplashActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

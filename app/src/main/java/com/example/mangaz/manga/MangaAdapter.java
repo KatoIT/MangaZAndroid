@@ -55,7 +55,8 @@ public class MangaAdapter extends RecyclerView.Adapter<MangaAdapter.MangaViewHol
             return;
         }
         holder.textViewMangaName.setText(manga.getMangaName()); // set Mame Manga
-        holder.imageViewMangaAvatar.setImageResource(R.drawable.mangaz1); // set Image
+//        holder.imageViewMangaAvatar.setImageResource(R.drawable.mangaz2); // set Image
+        holder.imageViewMangaAvatar.setImageResource(Integer.parseInt(manga.getUrlImage())); // set Image
         holder.cardViewItemManga.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

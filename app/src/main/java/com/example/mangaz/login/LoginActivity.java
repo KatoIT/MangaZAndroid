@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.mangaz.MainActivity;
 import com.example.mangaz.R;
 import com.example.mangaz.signup.SignUpActivity;
 import com.example.mangaz.User.Users;
@@ -75,6 +76,7 @@ public class LoginActivity extends AppCompatActivity implements LoginInterface {
     @Override
     public void LoginSuccess(String txt) {
         textViewValidLogin.setText(txt);
+        finish();
     }
 
 }

@@ -9,6 +9,11 @@ CREATE TABLE IF NOT EXISTS Users (
     Avatar BLOG, -- ảnh đại diện
     IsAdmin BOOLEAN -- Admin
 );
+/*
+INSERT INTO Users VALUES('admina','manAn1207*','Admin',21,99,'',NULL,True)
+Select * From Users
+delete from Users where UserName = 'admina'
+*/
 /*2 Bảng Theo dõi */
 CREATE TABLE IF NOT EXISTS Follow (
     UserNameFollow NVARCHAR(20) PRIMARY KEY, -- UserName Người theo dõi **(Khóa chính)**
@@ -22,12 +27,13 @@ CREATE TABLE IF NOT EXISTS Category(
 /*4 Bảng Thể Truyện */
 CREATE TABLE IF NOT EXISTS Manga(
     MangaName NVARCHAR(250) PRIMARY KEY, -- Tên truyện **(Khóa chính)**
-    Author NVARCHAR(100), -- tác giả
+    Author NVARCHAR(20), -- tác giả
     IsManga BOOLEAN, -- Là Manga (Truyện tranh, Manga,...) hay story (Tiểu thuyết, truyện chữ ,...)
     Introduce NVARCHAR(500), -- Giới thiệu Nội Dung truyện
     Accept BOOLEAN, -- Đã được phép đăng
     UrlImage TEXT, -- Đường dẫn ảnh
-    Avatar BLOG -- ảnh đại diện
+    Avatar BLOG, -- ảnh đại diện
+    FOREIGN KEY (Author) REFERENCES Users(UserName)
 );
 /*5 Bảng User Tương tác với Manga */
 CREATE TABLE IF NOT EXISTS UserManga(
@@ -40,7 +46,6 @@ CREATE TABLE IF NOT EXISTS UserManga(
 );
 /*6 Bảng các Thể loại của truyện */
 CREATE TABLE IF NOT EXISTS CategoryManga(
-    IdCatagoryManga NVARCHAR(100) PRIMARY KEY, -- IdCatagoryManga = CategoryNameMangaName **(Khóa chính)**
     Category_CategoryName NVARCHAR(250),
     Manga_MangaName NVARCHAR(250),
     FOREIGN KEY (Category_CategoryName) REFERENCES Category(CategoryName), -- Khóa ngoại với bảng Người dùng
@@ -51,14 +56,16 @@ CREATE TABLE IF NOT EXISTS Chapter(
     IdChapter NVARCHAR(270) PRIMARY KEY, -- IdChapter = MangaName + Chap **(Khóa chính)**
     Chap INTEGER, -- Số thứ tự Chương
     ContentChapter TEXT, -- nội dung của chap truyện (Tối đa 15000 ký tự)
+    DateUpdate Datetime, -- ngày ra chap
     Manga_MangaName NVARCHAR(250),
     FOREIGN KEY (Manga_MangaName) REFERENCES Manga(MangaName) -- Tên truyện
 );
 /*8 Bảng Bình luận*/
 CREATE TABLE IF NOT EXISTS Comment(
-    IdComment NVARCHAR(370) PRIMARY KEY, -- IdComment = UserName+MangaName+IdChap **(Khóa chính)**
+    IdComment NVARCHAR(370) PRIMARY KEY, -- IdComment = UserName+IdChap+time **(Khóa chính)**
     ContentComment TEXT, -- Nội dung Bình luận
     AnswerIdComment NVARCHAR(100), -- ID bình luận được trả lời
+    DateComment DateTime, -- Thời gian bình luận
     User_UserName NVARCHAR(20),
     Chapter_IdChapter NVARCHAR(270),
     FOREIGN KEY (User_UserName) REFERENCES Users(UserName), -- Người viết Bình luận
@@ -82,7 +89,6 @@ CREATE TABLE IF NOT EXISTS ChapterImage(
 );
 /*11 Bảng User Tương tác với Chapter*/
 CREATE TABLE IF NOT EXISTS UserChapter(
-    IdUserChapter NVARCHAR(100) PRIMARY KEY, -- IdUserChapter = UserName + Chapter **(Khóa chính)**
     TimeReading DATETIME, -- Thời gian lần cuối đọc chap DateTime.Now
     IsLike BOOLEAN, -- Có thích Chap
     User_UserName NVARCHAR(20),
