@@ -11,6 +11,19 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.database.sqlite.SQLiteStatement;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
+import com.example.mangaz.Model.CategoryManga;
+import com.example.mangaz.Model.Chapter;
+import com.example.mangaz.Model.ChapterImage;
+import com.example.mangaz.Model.Manga;
+import com.example.mangaz.Model.User;
+import com.example.mangaz.Model.UserChapter;
+import com.example.mangaz.Model.UserManga;
+
+import java.io.ByteArrayOutputStream;
 
 public class Database extends SQLiteOpenHelper {
 
@@ -46,6 +59,7 @@ public class Database extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO Users VALUES('Katoit','123123','Katoit Man',21,1,'',NULL,0);");
         db.execSQL("INSERT INTO Users VALUES('BacNorth','123123','Tiến Bắc',21,1,'',NULL,0);");
         db.execSQL("INSERT INTO Users VALUES('echkeutroimua','123123','Ếch kêu trời mưa',21,1,'',NULL,0);");
+        db.execSQL("INSERT INTO Users VALUES('daroemon','123123','Daroemon',21,1,'',NULL,0);");
         db.execSQL("INSERT INTO Category VALUES('Huyền huyễn');");
         db.execSQL("INSERT INTO Category VALUES('Học đường');");
         db.execSQL("INSERT INTO Category VALUES('Tổng tài');");
@@ -57,73 +71,13 @@ public class Database extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO Category VALUES('Hài hước');");
         db.execSQL("INSERT INTO Category VALUES('Viễn tưởng');");
         db.execSQL("INSERT INTO Category VALUES('Mạo hiểm');");
-        db.execSQL("INSERT INTO Category VALUES('Đô thị tu tiên');");
-        db.execSQL("INSERT INTO Category VALUES('Trinh thám');");
-        db.execSQL("INSERT INTO Manga VALUES('Tiên đế trở về','echkeutroimua',1,'Ba năm trước, Vân Thanh Nham bất ngờ từ nhân gian rơi vào tiên giới. Ba nghìn năm sau, hắn trở thành vân đế của tiên giới, phá được hư không, trở về nhân giới. Hắn phát hiện thời gian ở đây mới chỉ qua có 3 năm. \"Trước đây ta không có sức mạnh bảo vệ những người ta yêu thương, bây giờ, cả thế giới đều phải quỳ dưới chân ta',1,'2131165308',NULL);");
-        db.execSQL("INSERT INTO Manga VALUES('Đấu la đại lục','echkeutroimua',1,'Đường tam học trộm tuyệt thế võ công nhưng lại nhảy xuống vách núi tự sát để chứng minh sự minh bạch của mình, sau khi chuyển thế không ngờ lại trở thành một cậu bé đáng yêu luôn được mọi người ngưỡng mộ?! Anh ấy mang theo song võ hồn, phách lực tiên thiên mãn trời sinh gia nhập học viện Nặc Đinh, gặp được tiểu vũ dễ thương, sau đó bắt đầu một câu chuyện nhi nữ tình trường, mưa máu gió tanh.',1,'2131165305',NULL);");
-        db.execSQL("INSERT INTO Manga VALUES('Tận thế người trần','echkeutroimua',1,'Thế giới tương lai là thế giới xấu xí của nhân loại. 2 giờ chiều ngày 14 tháng 2 năm 2018, một viên thiên thạch rơi vào tầng khí quyển của trái đất...Trước khi rơi xuống, nó nổ thành vô số mảnh vỡ, rơi xuống khắp nơi trên trái đất, virus nó mang theo khi rơi nhanh chóng lan rộng! Hơn 70% số người đã biến dị thành quái vật, giống như zombies trong phim. Phương thức lây truyền cũng giống phim, người bị cắn sẽ biến thành zombies. Nhân loại rơi vào tình cảnh chủng tộc diệt hết, cướp bóc cả nơi, không có chính phụ quản lý. Có một vài người có thể kháng được loại đột biến đó, thậm chí kiểm soát nó để tiến hóa bản thân, thể lực của chúng ta có thể tăng mạnh.',1,'2131165307',NULL);");
-        db.execSQL("INSERT INTO Manga VALUES('Wechat của tôi liên kết tam giới','echkeutroimua',1,'Một kẻ không tài cán, làm gì cũng bị xem như tên thất bại không được coi trong, ai ngờ đâu có sự giúp sức hậu thuẫn từ các thần tiên, đặc biệt là Tề Thiên Đại Thánh, kẻ bị coi thường lại biến thành người cứu rỗi nhân loại...',1,'2131165310',NULL);");
-        db.execSQL("INSERT INTO Manga VALUES('Nhặt hoa khôi về làm vợ','echkeutroimua',1,'Khi cao thủ đã quyết định rửa tay gác kiểu,  ẩn dật quay về Đô Thành tiếp tục làm một học sinh cấp 3 bình thường. Nhưng hào quang nam chính không cho phép bị lu mờ, trở thành người nổi bật nhất trường, các hoa khôi vây quanh không rời... rắc rối cũn ùn ùn kéo đến',1,'2131165306',NULL);");
-        db.execSQL("INSERT INTO Manga VALUES('Tổng tài tại thượng','echkeutroimua',1,'Cung Âu, một tên thiếu gia giàu có mắc bệnh hoang tưởng, và Thời Tiểu Niệm, một tác giả truyện tranh nghèo rớt mùng tơi và cô đơn đã bị buộc chặt lấy nhau trong một tình huống hết sức trớ trêu: Cung Âu nghĩ Thời Tiểu Niệm đã giấu nhẹm đứa con của hai người (không hề). Cùng theo dõi xem nam chính sẽ ngược nữ chính theo những cách nào, và làm thế nào mà họ yêu nhau...',1,'2131165309',NULL);");
-        db.execSQL("INSERT INTO CategoryManga VALUES('Huyền huyễn','Tiên đế trở về');");
-        db.execSQL("INSERT INTO CategoryManga VALUES('Hành động','Tiên đế trở về');");
-        db.execSQL("INSERT INTO CategoryManga VALUES('Huyền huyễn','Đấu la đại lục');");
-        db.execSQL("INSERT INTO CategoryManga VALUES('Hành động','Đấu la đại lục');");
-        db.execSQL("INSERT INTO CategoryManga VALUES('Xuyên không','Đấu la đại lục');");
-        db.execSQL("INSERT INTO CategoryManga VALUES('Kinh dị','Tận thế người trần');");
-        db.execSQL("INSERT INTO CategoryManga VALUES('Hành động','Tận thế người trần');");
-        db.execSQL("INSERT INTO CategoryManga VALUES('Mạo hiểm','Tận thế người trần');");
-        db.execSQL("INSERT INTO CategoryManga VALUES('Đô thị tu tiên','Wechat của tôi liên kết tam giới');");
-        db.execSQL("INSERT INTO CategoryManga VALUES('Học đường','Wechat của tôi liên kết tam giới');");
-        db.execSQL("INSERT INTO CategoryManga VALUES('Hài hước','Wechat của tôi liên kết tam giới');");
-        db.execSQL("INSERT INTO CategoryManga VALUES('Tình yêu','Nhặt hoa khôi về làm vợ');");
-        db.execSQL("INSERT INTO CategoryManga VALUES('Học đường','Nhặt hoa khôi về làm vợ');");
-        db.execSQL("INSERT INTO CategoryManga VALUES('Harem','Nhặt hoa khôi về làm vợ');");
-        db.execSQL("INSERT INTO CategoryManga VALUES('Hành động','Nhặt hoa khôi về làm vợ');");
-        db.execSQL("INSERT INTO CategoryManga VALUES('Tổng tài','Tổng tài tại thượng');");
-        db.execSQL("INSERT INTO CategoryManga VALUES('Tình yêu','Tổng tài tại thượng');");
-        db.execSQL("INSERT INTO Chapter VALUES('Tiên đế trở về-0',0,'','2020-04-15','Tiên đế trở về');");
-        db.execSQL("INSERT INTO Chapter VALUES('Tiên đế trở về-1',1,'','2020-04-16','Tiên đế trở về');");
-        db.execSQL("INSERT INTO Chapter VALUES('Tiên đế trở về-2',2,'','2020-04-17','Tiên đế trở về');");
-        db.execSQL("INSERT INTO Chapter VALUES('Tiên đế trở về-3',4,'','2020-04-18','Tiên đế trở về');");
-        db.execSQL("INSERT INTO Chapter VALUES('Tiên đế trở về-4',3,'','2020-04-19','Tiên đế trở về');");
-        db.execSQL("INSERT INTO Chapter VALUES('Đấu la đại lục-0',0,'','2020-04-15','Đấu la đại lục');");
-        db.execSQL("INSERT INTO Chapter VALUES('Đấu la đại lục-1',1,'','2020-04-16','Đấu la đại lục');");
-        db.execSQL("INSERT INTO Chapter VALUES('Đấu la đại lục-2',2,'','2020-04-17','Đấu la đại lục');");
-        db.execSQL("INSERT INTO Chapter VALUES('Đấu la đại lục-3',3,'','2020-04-18','Đấu la đại lục');");
-        db.execSQL("INSERT INTO Chapter VALUES('Tận thế người trần-0',0,'','2020-04-15','Tận thế người trần');");
-        db.execSQL("INSERT INTO Chapter VALUES('Tận thế người trần-1',1,'','2020-04-16','Tận thế người trần');");
-        db.execSQL("INSERT INTO Chapter VALUES('Wechat của tôi liên kết tam giới-0',0,'','2020-04-15','Wechat của tôi liên kết tam giới');");
-        db.execSQL("INSERT INTO Chapter VALUES('Wechat của tôi liên kết tam giới-1',1,'','2020-04-16','Wechat của tôi liên kết tam giới');");
-        db.execSQL("INSERT INTO Chapter VALUES('Wechat của tôi liên kết tam giới-2',2,'','2020-04-17','Wechat của tôi liên kết tam giới');");
-        db.execSQL("INSERT INTO Chapter VALUES('Nhặt hoa khôi về làm vợ-0',0,'','2020-04-15','Nhặt hoa khôi về làm vợ');");
-        db.execSQL("INSERT INTO Chapter VALUES('Nhặt hoa khôi về làm vợ-1',1,'','2020-04-16','Nhặt hoa khôi về làm vợ');");
-        db.execSQL("INSERT INTO Chapter VALUES('Nhặt hoa khôi về làm vợ-2',2,'','2020-04-17','Nhặt hoa khôi về làm vợ');");
-        db.execSQL("INSERT INTO Chapter VALUES('Nhặt hoa khôi về làm vợ-3',3,'','2020-04-18','Nhặt hoa khôi về làm vợ');");
-        db.execSQL("INSERT INTO Chapter VALUES('Nhặt hoa khôi về làm vợ-4',4,'','2020-04-19','Nhặt hoa khôi về làm vợ');");
-        db.execSQL("INSERT INTO Chapter VALUES('Nhặt hoa khôi về làm vợ-5',5,'','2020-04-20','Nhặt hoa khôi về làm vợ');");
-        db.execSQL("INSERT INTO Chapter VALUES('Tổng tài tại thượng-0',0,'','2020-04-15','Tổng tài tại thượng');");
-        db.execSQL("INSERT INTO ChapterImage VALUES(0,NULL,'','Tiên đế trở về-0');");
-        db.execSQL("INSERT INTO ChapterImage VALUES(1,NULL,'','Tiên đế trở về-0');");
-        db.execSQL("INSERT INTO ChapterImage VALUES(2,NULL,'','Tiên đế trở về-0');");
-        db.execSQL("INSERT INTO ChapterImage VALUES(3,NULL,'','Tiên đế trở về-0');");
-        db.execSQL("INSERT INTO ChapterImage VALUES(4,NULL,'','Tiên đế trở về-0');");
-        db.execSQL("INSERT INTO ChapterImage VALUES(5,NULL,'','Tiên đế trở về-0');");
-        db.execSQL("INSERT INTO Comment VALUES('Katoit-Tiên đế trở về-0-200515010100','Main bá đạo','','2020-05-15','Katoit','Tiên đế trở về-0');");
-        db.execSQL("INSERT INTO Comment VALUES('Katoit-Tiên đế trở về-0-200514010100','Hay','','2020-05-14','Katoit','Tiên đế trở về-0');");
-        db.execSQL("INSERT INTO Comment VALUES('Katoit-Tiên đế trở về-0-200513010100','1 like','','2020-05-13','Katoit','Tiên đế trở về-0');");
-        db.execSQL("INSERT INTO Comment VALUES('Katoit-Tiên đế trở về-0-200512010100','Hay','','2020-05-12','Katoit','Tiên đế trở về-0');");
-        db.execSQL("INSERT INTO Comment VALUES('BacNorth-Tiên đế trở về-0-200516010100','Chuẩn','Katoit-Tiên đế trở về-0-200515010100','2020-05-16','BacNorth','Tiên đế trở về-0');");
-        db.execSQL("INSERT INTO Comment VALUES('Katoit-Tiên đế trở về-0-200510010100','like','Katoit-Tiên đế trở về-0-200513010100','2020-05-10','Katoit','Tiên đế trở về-0');");
-        db.execSQL("INSERT INTO UserChapter VALUES('2020-05-15',0,'Katoit','Katoit-Tiên đế trở về-0-200515010100');");
-        db.execSQL("INSERT INTO LikeToComment VALUES(1,'BacNorth','Katoit-Tiên đế trở về-0-200515010100');");
-        db.execSQL("INSERT INTO UserManga VALUES(1,4,'BacNorth','Tiên đế trở về');");
-        db.execSQL("INSERT INTO UserManga VALUES(0,5,'Katoit','Tiên đế trở về');");
-        db.execSQL("INSERT INTO Follow VALUES('Katoit','BacNorth');"
-        );
+        db.execSQL("INSERT INTO Category VALUES('Đô thị');");
+        db.execSQL("INSERT INTO Category VALUES('Tu tiên');");
+        db.execSQL("INSERT INTO Category VALUES('Võ thuật');");
+        db.execSQL("INSERT INTO Category VALUES('Đối kháng');");
     }
 
-    // Truy vấn có trả kết quả: CREATE, INSERT, UPDATE, DELETE,...
+    // Tạo bảng
     public void CreateTable(SQLiteDatabase db) {
         // -1- Bảng Users
         //db.execSQL("INSERT INTO Users VALUES('admin','manAn1207*','Admin',21,99,'',NULL,1)");
@@ -134,7 +88,7 @@ public class Database extends SQLiteOpenHelper {
                 "    Age INTEGER, " +                       // tuổi
                 "    Level INTEGER, " +                     // cấp độ
                 "    UrlImage TEXT, " +                     // Đường dẫn ảnh
-                "    Avatar BLOG, " +                       // ảnh đại diện
+                "    Avatar BLOB, " +                       // ảnh đại diện
                 "    IsAdmin BOOLEAN " +                    // Admin
                 ")");
         // -2- Bảng Follow
@@ -155,7 +109,7 @@ public class Database extends SQLiteOpenHelper {
                 "    Introduce NVARCHAR(500), " +// Giới thiệu Nội Dung truyện
                 "    Accept BOOLEAN, " +// Đã được phép đăng
                 "    UrlImage TEXT, " +// Đường dẫn ảnh
-                "    Avatar BLOG, " +// ảnh đại diện
+                "    Avatar BLOB, " +// ảnh đại diện
                 "    FOREIGN KEY (Author) REFERENCES Users(UserName)" +
                 ")");
         // -5- Bảng UserManga
@@ -185,7 +139,7 @@ public class Database extends SQLiteOpenHelper {
                 ")");
         // -8- Bảng Comment
         db.execSQL("CREATE TABLE IF NOT EXISTS Comment(" +
-                "    IdComment NVARCHAR(370) PRIMARY KEY, " +// IdComment = UserName+MangaName+IdChap **(Khóa chính)**
+                "    IdComment NVARCHAR(370) PRIMARY KEY, " +// IdComment = UserName+IdChap **(Khóa chính)**
                 "    ContentComment TEXT, " +// Nội dung Bình luận
                 "    AnswerIdComment NVARCHAR(100), " +// ID bình luận được trả lời
                 "    DateComment DateTime," +
@@ -205,7 +159,7 @@ public class Database extends SQLiteOpenHelper {
         // -10- Bảng ChapterImage
         db.execSQL("CREATE TABLE IF NOT EXISTS ChapterImage(" +
                 "    ImageNumber INTEGER, " +// Số thứ tự Chương
-                "    Image BLOG, " +// Ảnh
+                "    Image BLOB, " +// Ảnh
                 "    UrlImage TEXT, " +// Đường dẫn ảnh
                 "    Chapter_IdChapter NVARCHAR(270)," +
                 "    FOREIGN KEY (Chapter_IdChapter) REFERENCES Chapter(IdChapter) " +// Chapter truyện
@@ -239,10 +193,149 @@ public class Database extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("DELETE FROM " + tableName + " WHERE " + where + ";");
     }
 
-    // get list by category
+    /*
+     * Insert Model
+     *
+     */
+    // Insert Manga
+    public void INSERT_MANGA(Manga manga) {
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+        String sql = "INSERT INTO Manga VALUES(?,?,?,?,?,'',?)";
+        // bitmap --> byte[]
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        manga.getAvatar().compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+        byte[] bytes = byteArrayOutputStream.toByteArray();
+
+        SQLiteStatement mSqLiteStatement = sqLiteDatabase.compileStatement(sql);
+        mSqLiteStatement.clearBindings();
+        mSqLiteStatement.bindString(1, manga.getMangaName());
+        mSqLiteStatement.bindString(2, manga.getAuthor());
+        mSqLiteStatement.bindString(3, manga.getManga().toString());
+        mSqLiteStatement.bindString(4, manga.getIntroduce());
+        mSqLiteStatement.bindString(5, manga.getAccept().toString());
+        mSqLiteStatement.bindBlob(6, bytes);
+
+        mSqLiteStatement.executeInsert();
+    }
+
+    // Insert Chapter
+    public void INSERT_CHAPTER(Chapter chapter) {
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+        String sql = "INSERT INTO Chapter VALUES(?,?,?,?,?)";
+
+        SQLiteStatement mSqLiteStatement = sqLiteDatabase.compileStatement(sql);
+        mSqLiteStatement.clearBindings();
+        mSqLiteStatement.bindString(1, chapter.getIdChapter());
+        mSqLiteStatement.bindLong(2, chapter.getChap());
+        mSqLiteStatement.bindString(3, chapter.getContentChapter());
+        mSqLiteStatement.bindString(4, chapter.getDateUpdate());
+        mSqLiteStatement.bindString(5, chapter.getManga_MangaName());
+
+        mSqLiteStatement.executeInsert();
+    }
+
+    // Insert CategoryManga
+    public void INSERT_CATEGORYMANGA(CategoryManga categoryManga) {
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+        String sql = "INSERT INTO CategoryManga VALUES(?,?)";
+
+        SQLiteStatement mSqLiteStatement = sqLiteDatabase.compileStatement(sql);
+        mSqLiteStatement.clearBindings();
+        mSqLiteStatement.bindString(1, categoryManga.getCategory_CategoryName());
+        mSqLiteStatement.bindString(2, categoryManga.getManga_MangaName());
+
+        mSqLiteStatement.executeInsert();
+    }
+
+    // Insert ChapterImage
+    public void INSERT_CHAPTERIMAGE(ChapterImage chapterImage) {
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+        String sql = "INSERT INTO ChapterImage VALUES(?,?,?,?)";
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        chapterImage.getImage().compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+        byte[] bytes = byteArrayOutputStream.toByteArray();
+
+        SQLiteStatement mSqLiteStatement = sqLiteDatabase.compileStatement(sql);
+        mSqLiteStatement.clearBindings();
+        mSqLiteStatement.bindLong(1, chapterImage.getImageNumber());
+        mSqLiteStatement.bindBlob(2, bytes);
+        mSqLiteStatement.bindString(3, chapterImage.getUrlImage());
+        mSqLiteStatement.bindString(4, chapterImage.getChapter_IdChapter());
+
+        mSqLiteStatement.executeInsert();
+    }
+
+    /*
+     * get Model
+     *
+     */
+    // get Manga
+    public Manga GetManga(String mangaName) {
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM Manga WHERE MangaName = '" + mangaName + "';", null);
+        cursor.moveToFirst();
+        if (cursor.getCount() == 0) {
+            return null;
+        }
+        Bitmap bitmap;
+        if (cursor.getBlob(6) != null) {
+            bitmap = CovertBytesToBitmap(cursor.getBlob(6));
+        } else {
+            bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.img_anh_mac_dinh);
+        }
+        return new Manga(cursor.getString(0),
+                cursor.getString(1),
+                Boolean.valueOf(cursor.getString(2)),
+                cursor.getString(3),
+                Boolean.valueOf(cursor.getString(4)),
+                cursor.getString(5),
+                bitmap);
+    }
+
+    // get User
+    public User GetUser(String userName) {
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM Users WHERE Username = '" + userName + "';", null);
+        cursor.moveToFirst();
+        return new User(cursor.getString(0),
+                cursor.getString(1),
+                cursor.getString(2),
+                cursor.getInt(3),
+                cursor.getInt(4),
+                cursor.getString(5),
+                Boolean.valueOf(cursor.getString(7)));
+    }
+
+    // get UserChapter
+    public UserChapter GetUserChapter(String username, String idchapter) {
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM UserChapter WHERE User_UserName = '" + username + "' AND Chapter_IdChapter='" + idchapter + "';", null);
+        cursor.moveToFirst();
+        return new UserChapter(cursor.getString(0),
+                Boolean.valueOf(cursor.getString(1)),
+                cursor.getString(2),
+                cursor.getString(3));
+    }
+
+    // get UserManga
+    public UserManga GetUserManga(String username, String manganame) {
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM UserManga WHERE User_UserName = '" + username + "' AND Manga_MangaName='" + manganame + "';", null);
+        cursor.moveToFirst();
+        return new UserManga(Boolean.valueOf(cursor.getString(0)),
+                cursor.getInt(1),
+                cursor.getString(2),
+                cursor.getString(3));
+    }
+
+    /*
+     * get Cursor Model
+     *
+     */
+    // get list Manga by category
     public Cursor GetListMangaByCategory(String categoryName) {
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
-        return sqLiteDatabase.rawQuery("SELECT MangaName, Author, IsManga, Introduce, UrlImage FROM CategoryManga JOIN Manga ON Manga.MangaName = CategoryManga.Manga_MangaName WHERE Category_CategoryName = '" + categoryName + "' AND Accept = 1;", null);
+        return sqLiteDatabase.rawQuery("SELECT Manga.MangaName FROM CategoryManga JOIN Manga ON Manga.MangaName = CategoryManga.Manga_MangaName WHERE Category_CategoryName = '" + categoryName + "';", null);
     }
 
     // get list Category
@@ -266,7 +359,80 @@ public class Database extends SQLiteOpenHelper {
     // get list Manga
     public Cursor GetListManga() {
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
-        return sqLiteDatabase.rawQuery("SELECT MangaName, Author, IsManga, Introduce, UrlImage FROM Manga;", null);
+        return sqLiteDatabase.rawQuery("SELECT * FROM Manga;", null);
     }
 
+    // get list Manga mới cập nhật
+    public Cursor GetListMangaNewUpdate() {
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+        return sqLiteDatabase.rawQuery("SELECT Manga_MangaName FROM Chapter ORDER BY DateUpdate DESC;", null);
+    }
+
+    // get list Manga được yêu thíc nhât
+    public Cursor GetListMangaTopLike() {
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+        return sqLiteDatabase.rawQuery("SELECT MangaName, COUNT(User_UserName) FROM Manga JOIN Chapter ON Manga.MangaName = Chapter.Manga_MangaName JOIN UserChapter ON UserChapter.Chapter_IdChapter = Chapter.IdChapter WHERE IsLike <> 0 GROUP BY MangaName ORDER BY COUNT(User_UserName) DESC", null);
+    }
+
+    // get list Manga nhiều CMT nhất
+    public Cursor GetListMangaTopComment() {
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+        return sqLiteDatabase.rawQuery("SELECT MangaName, COUNT(User_UserName) FROM Manga JOIN Chapter ON Manga.MangaName = Chapter.Manga_MangaName JOIN Comment ON Comment.Chapter_IdChapter = Chapter.IdChapter  GROUP BY MangaName ORDER BY COUNT(User_UserName) DESC", null);
+    }
+
+    // get list Manga nhiều Follow nhất
+    public Cursor GetListMangaTopFollow() {
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+        return sqLiteDatabase.rawQuery("SELECT Manga_MangaName, COUNT(User_UserName) FROM UserManga WHERE IsFollow <> 0 GROUP BY Manga_MangaName ORDER BY COUNT(User_UserName) DESC", null);
+    }
+
+    // get list Manga nhiều View nhất
+    public Cursor GetListMangaTopView() {
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+        return sqLiteDatabase.rawQuery("SELECT Manga_MangaName, COUNT(User_UserName) FROM UserManga GROUP BY Manga_MangaName ORDER BY COUNT(User_UserName) DESC", null);
+    }
+
+    /*
+     * get type Model
+     *
+     */
+    public Boolean isUserLike(String username, String idchapter) {
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM UserChapter WHERE User_UserName = '" + username + "' AND Chapter_IdChapter='" + idchapter + "';", null);
+
+        if (Boolean.valueOf(cursor.getCount() == 0)) {
+            return false;
+        }
+        return true;
+    }
+
+    public Boolean isUserManga(String username, String manganame) {
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM UserManga WHERE User_UserName = '" + username + "' AND Manga_MangaName='" + manganame + "';", null);
+
+        if (Boolean.valueOf(cursor.getCount() == 0)) {
+            return false;
+        }
+        return true;
+    }
+
+    public int getNumberChapbyChapId(String chapId) {
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT Chap FROM Chapter WHERE IdChapter = '" + chapId + "';", null);
+        cursor.moveToFirst();
+        return cursor.getInt(0);
+    }
+
+    public String GetChapIdbyNumberChap(int numberChap, String mangaName) {
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT IdChapter FROM Chapter WHERE Chap = " + numberChap + " AND Manga_MangaName = '" + mangaName + "';", null);
+        cursor.moveToFirst();
+        return cursor.getString(0);
+    }
+
+
+    public Bitmap CovertBytesToBitmap(byte[] bytes) {
+        // byte[] --> bitmat
+        return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+    }
 }

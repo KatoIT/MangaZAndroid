@@ -4,26 +4,46 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
+    android:background="@color/p_dack"
     tools:context=".HomeFragment">
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="364dp"
-        android:layout_marginEnd="168dp"
+        android:layout_marginTop="222dp"
         android:text="Tài Khoản"
+        android:textColor="@color/light_sky_blue"
+        android:textSize="22dp"
+        android:textStyle="italic|bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/buttonMainToLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="31dp"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="@color/black"
         android:text="Đăng nhập"
+        android:textColor="@color/light_sky_blue"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <Button
+        android:id="@+id/buttonAdmin"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="@color/black"
+        android:text="Admin"
+        android:textColor="@color/light_sky_blue"
+        app:layout_constraintEnd_toEndOf="@+id/buttonMainToLogin"
+        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintStart_toStartOf="@+id/buttonMainToLogin"
+        app:layout_constraintTop_toBottomOf="@+id/buttonMainToLogin" />
 </androidx.constraintlayout.widget.ConstraintLayout>

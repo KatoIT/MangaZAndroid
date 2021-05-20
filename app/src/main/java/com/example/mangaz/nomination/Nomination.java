@@ -1,6 +1,6 @@
 package com.example.mangaz.nomination;
 
-import com.example.mangaz.manga.Manga;
+import com.example.mangaz.Model.Manga;
 
 import java.util.List;
 

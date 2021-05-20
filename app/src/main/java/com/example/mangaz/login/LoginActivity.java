@@ -7,8 +7,6 @@
  * */
 package com.example.mangaz.login;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -17,10 +15,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.mangaz.MainActivity;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.mangaz.Model.User;
 import com.example.mangaz.R;
 import com.example.mangaz.signup.SignUpActivity;
-import com.example.mangaz.User.Users;
 
 public class LoginActivity extends AppCompatActivity implements LoginInterface {
     private Button buttonLogin, buttonLoginToSignUp;
@@ -61,7 +60,7 @@ public class LoginActivity extends AppCompatActivity implements LoginInterface {
     private void clickLogin() {
         String strUserName = editTextUserName.getText().toString().trim();
         String strPassword = editTextPassword.getText().toString().trim();
-        Users user = new Users(strUserName, strPassword);
+        User user = new User(strUserName, strPassword);
         mLoginPresenter.Login(user);
     }
 

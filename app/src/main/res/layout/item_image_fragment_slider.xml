@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        app:srcCompat="@drawable/img_chu_thien_ky" />
+        app:srcCompat="@drawable/img_anh_mac_dinh" />
 
     <RelativeLayout
         android:layout_width="match_parent"

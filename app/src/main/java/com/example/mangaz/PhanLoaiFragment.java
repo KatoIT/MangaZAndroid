@@ -20,8 +20,6 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.mangaz.category.ViewPager2Adapter;
-import com.example.mangaz.manga.Manga;
-import com.example.mangaz.nomination.Nomination;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
@@ -58,6 +56,7 @@ public class PhanLoaiFragment extends Fragment {
     private List<String> getListCatrgory() { // truyền dữ liệu vào RecyclerView
         List<String> listCategory = new ArrayList<>();
         Cursor cursor = db.GetListCategory();
+        listCategory.add("ALL");
         while (cursor.moveToNext()){
             listCategory.add(cursor.getString(0));
         }

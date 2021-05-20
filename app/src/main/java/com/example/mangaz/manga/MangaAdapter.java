@@ -18,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.mangaz.Model.Manga;
 import com.example.mangaz.R;
 
 import org.jetbrains.annotations.NotNull;
@@ -28,7 +29,7 @@ public class MangaAdapter extends RecyclerView.Adapter<MangaAdapter.MangaViewHol
     private List<Manga> mangaList;
     IClickItemListener mIClickItemListener;
 
-    public interface IClickItemListener{ // interface Sự kiện click
+    public interface IClickItemListener { // interface Sự kiện click
         void onClickItemManga(Manga manga);
     }
 
@@ -55,8 +56,11 @@ public class MangaAdapter extends RecyclerView.Adapter<MangaAdapter.MangaViewHol
             return;
         }
         holder.textViewMangaName.setText(manga.getMangaName()); // set Mame Manga
-//        holder.imageViewMangaAvatar.setImageResource(R.drawable.mangaz2); // set Image
-        holder.imageViewMangaAvatar.setImageResource(Integer.parseInt(manga.getUrlImage())); // set Image
+        if (manga.getUrlImage().length() < 2) {
+            holder.imageViewMangaAvatar.setImageBitmap(manga.getAvatar());
+        } else {
+            holder.imageViewMangaAvatar.setImageResource(Integer.parseInt(manga.getUrlImage()));
+        }
         holder.cardViewItemManga.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

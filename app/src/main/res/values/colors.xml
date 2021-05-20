@@ -32,6 +32,9 @@
     <color name="colorPrimaryDark">#102027</color>
     <color name="colorPrimaryLight">#62727b</color>
     <color name="colorOnChecked">#FF6347</color>
+<!--    -->
+    <color name="black_trans">#33000000</color>
+    <color name="trans_parent">#1C00ff00</color>
 
 
 </resources>

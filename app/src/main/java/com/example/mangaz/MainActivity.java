@@ -30,9 +30,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_bar);
+        bottomNavigationView = findViewById(R.id.bottom_navigation_bar);
         HomeFragment homeFragment = new HomeFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout_container, homeFragment).commit();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.frameLayout_container, homeFragment)
+                .commit();
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -41,22 +43,20 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.nav_trang_chu: {
                         fragment = new HomeFragment();
-                        getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout_container, fragment).commit();
                         break;
                     }
                     case R.id.nav_phan_loai: {
                         fragment = new PhanLoaiFragment();
-                        getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout_container, fragment).commit();
-
                         break;
                     }
                     case R.id.nav_tai_khoan: {
                         fragment = new TaiKhoanFragment();
-                        getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout_container, fragment).commit();
                         break;
                     }
-
                 }
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.frameLayout_container, fragment)
+                        .commit();
                 return true;
             }
         });
@@ -71,9 +71,10 @@ public class MainActivity extends AppCompatActivity {
             return;
         } else {
             toast = Toast.makeText(MainActivity.this, "Nhấp Back 1 lần nữa để thoát ", Toast.LENGTH_SHORT);
-            //  + R.drawable.image_tien_de_tro_ve + " "+ R.drawable.image_dau_la_dai_luc + " "+ R.drawable.image_tan_the_nguoi_tran + " "+ R.drawable.image_wechat_cua_toi_lien_ket_tam_gioi + " "+ R.drawable.image_nhat_hoa_khoi_ve_lam_vo + " "+ R.drawable.image_tong_tai_tai_thuong + " "
             toast.show();
         }
         backPressTime = System.currentTimeMillis();
+
+
     }
 }

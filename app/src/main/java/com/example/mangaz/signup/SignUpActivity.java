@@ -16,8 +16,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.mangaz.Model.User;
 import com.example.mangaz.R;
-import com.example.mangaz.User.Users;
 
 public class SignUpActivity extends AppCompatActivity implements SignUpInterface {
     private Button buttonSignUp;
@@ -55,8 +55,8 @@ public class SignUpActivity extends AppCompatActivity implements SignUpInterface
         String strNickName = editTextNickName.getText().toString().trim();
         Integer strAge = Integer.parseInt(editTextAge.getText().toString().trim());
         if (strPassword.equals(strPassword2)) {
-            Users user = new Users(strUserName, strPassword, strNickName, strAge);
-            if (mSignUpPresenter.SignUp(user)){
+            User user = new User(strUserName, strPassword, strNickName, strAge);
+            if (mSignUpPresenter.SignUp(user)) {
                 Toast.makeText(this, "Tạo tài khoản thành công!", Toast.LENGTH_SHORT).show();
                 this.finish();
             }

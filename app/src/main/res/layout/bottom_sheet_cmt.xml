@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/bottom_sheet_cmt"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="8dp"
+    android:background="@color/white"
+
+    app:behavior_hideable="false"
+    app:behavior_peekHeight="35dp"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="25dp"
+                android:src="@drawable/previouschap"
+                android:id="@+id/btnPreviousChap"
+                android:layout_weight="1"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="26 Bình luận"
+                android:layout_weight="3"
+                android:id="@+id/tvCountCmtChap"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                android:textColor="#F44336"
+                android:textStyle="bold" />
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="25dp"
+                android:src="@drawable/nextchap"
+                android:id="@+id/btnNextChap"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
+        <EditText
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:hint="Type here..."
+            android:id="@+id/txtcmtchap"
+            android:layout_marginTop="40dp"
+            android:layout_marginLeft="18dp"/>
+        <ImageButton
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/btncmtchap"
+            android:layout_marginTop="45dp"
+            android:layout_marginLeft="230dp"
+            android:src="@drawable/send"
+            android:scaleType="centerCrop"
+            android:background="@color/trans_parent"/>
+
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:id="@+id/btnlike"
+            android:layout_marginTop="35dp"
+            android:layout_marginLeft="300dp"
+            android:src="@drawable/unlike"
+            android:scaleType="centerCrop"
+            android:background="@color/trans_parent"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="450dp"
+            android:layout_marginTop="80dp"
+            android:padding="12dp"
+            android:id="@+id/rcv_listcmtchap"/>
+
+    </RelativeLayout>
+</LinearLayout>

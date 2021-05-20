@@ -2,9 +2,9 @@
     <!-- Base application theme. -->
     <style name="Theme.MangaZ" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/p_dack_night</item>
-        <item name="colorPrimaryVariant">@color/p_dack_night</item>
-        <item name="colorOnPrimary">@color/p_light_night</item>
+        <item name="colorPrimary">@color/p_dack</item>
+        <item name="colorPrimaryVariant">@color/p_dack</item>
+        <item name="colorOnPrimary">@color/p_light</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_200</item>

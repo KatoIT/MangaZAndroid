@@ -4,12 +4,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.mangaz.manga.Manga;
-import com.example.mangaz.nomination.Nomination;
+import com.example.mangaz.Model.Manga;
 import com.smarteist.autoimageslider.SliderViewAdapter;
 
 import java.util.List;
@@ -43,8 +41,11 @@ public class SliderAdapter extends SliderViewAdapter<SliderAdapter.SliderViewHol
         if (manga == null) {
             return;
         }
-//        viewHolder.imageView.setImageResource(R.drawable.img_chu_thien_ky);
-        viewHolder.imageView.setImageResource(Integer.parseInt(manga.getUrlImage()));
+        if (manga.getUrlImage().length()<2){
+            viewHolder.imageView.setImageBitmap(manga.getAvatar());
+        }else {
+            viewHolder.imageView.setImageResource(Integer.parseInt(manga.getUrlImage()));
+        }
         viewHolder.textView.setText(manga.getMangaName());
         viewHolder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override

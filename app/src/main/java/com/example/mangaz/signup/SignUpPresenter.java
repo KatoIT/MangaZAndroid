@@ -11,7 +11,7 @@ import android.content.Context;
 import android.database.Cursor;
 
 import com.example.mangaz.Database;
-import com.example.mangaz.User.Users;
+import com.example.mangaz.Model.User;
 
 public class SignUpPresenter {
     private SignUpInterface mSignUpInterface;
@@ -22,7 +22,7 @@ public class SignUpPresenter {
         this.mContext = mContext;
     }
 
-    public Boolean SignUp(Users user) {
+    public Boolean SignUp(User user) {
         if (!user.ísValidUserName()) {
             mSignUpInterface.SignUpError("Tên đăng nhập có ít nhất 4 ký tự");
         } else {
@@ -45,7 +45,7 @@ public class SignUpPresenter {
         return false;
     }
 
-    public Boolean CheckUserSignUp(Users user) {
+    public Boolean CheckUserSignUp(User user) {
         Database db = new Database(mContext);
         Cursor cursor = db.GetData("SELECT *  FROM Users WHERE UserName = '" + user.getUserName() + "'");
         return (cursor.getCount() == 0);

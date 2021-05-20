@@ -1,5 +1,7 @@
 package com.example.mangaz.category;
 
+import android.content.Context;
+import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,24 +12,28 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.mangaz.Database;
+import com.example.mangaz.Model.Manga;
 import com.example.mangaz.R;
-import com.example.mangaz.manga.Manga;
 import com.example.mangaz.manga.MangaAdapter;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>{
+public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder> {
     private List<Manga> mangaList;
+    private Database db;
+    private Context mContext;
     MangaAdapter.IClickItemListener mIClickItemListener;
 
-    public interface IClickItemListener{ // interface Sự kiện click
+    public interface IClickItemListener { // interface Sự kiện click
         void onClickItemManga(Manga manga);
     }
 
-    public CategoryAdapter(MangaAdapter.IClickItemListener mIClickItemListener) {
+    public CategoryAdapter(Context mContext, MangaAdapter.IClickItemListener mIClickItemListener) {
         this.mIClickItemListener = mIClickItemListener;
+        this.mContext = mContext;
     }
 
     public void setData(List<Manga> mangaList) {
@@ -49,10 +55,24 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
             return;
         }
         holder.textViewMangaNameItem.setText(manga.getMangaName()); // set Mame Manga
-//        holder.imageViewMangaAvatar.setImageResource(R.drawable.mangaz2); // set Image
-        holder.imageViewMangaAvatarItem.setImageResource(Integer.parseInt(manga.getUrlImage())); // set Image
-        holder.textViewCategoryInItemManga.setText(manga.getListCategory());
-        holder.textViewChapItemManga.setText(manga.getCountChapter() + " Chap");
+        if (manga.getUrlImage().length() < 2) {
+            holder.imageViewMangaAvatarItem.setImageBitmap(manga.getAvatar());
+        } else {
+            holder.imageViewMangaAvatarItem.setImageResource(Integer.parseInt(manga.getUrlImage()));
+        }
+        db = new Database(mContext);
+        String mCategory = "";
+        Cursor cursor = db.GetListCategoryByMangaName(manga.getMangaName());
+        while (cursor.moveToNext()) {
+            if (mCategory.isEmpty()) {
+                mCategory = cursor.getString(0);
+            } else {
+                mCategory += "/" + cursor.getString(0);
+            }
+        }
+        cursor = db.GetChapterByMangaName(manga.getMangaName());
+        holder.textViewCategoryInItemManga.setText(mCategory);
+        holder.textViewChapItemManga.setText(cursor.getCount() + " Chap");
         holder.linearLayoutItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

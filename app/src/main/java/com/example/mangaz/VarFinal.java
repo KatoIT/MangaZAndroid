@@ -5,4 +5,5 @@ public class VarFinal {
     public final String PASSWORD = "password";
     public final String TXT_NULL = "null";
     public final String INSTALL_FOR_THE_FIRST_TIME = "install";
+    public final String MANGA_NAME = "manganame";
 }

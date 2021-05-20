@@ -1,10 +1,9 @@
 package com.example.mangaz;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
+import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -13,8 +12,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.mangaz.Model.Manga;
 import com.example.mangaz.category.CategoryAdapter;
-import com.example.mangaz.manga.Manga;
 import com.example.mangaz.manga.MangaAdapter;
 
 import java.util.ArrayList;
@@ -66,10 +69,14 @@ public class SearchActivity extends AppCompatActivity {
                 } else {
                     String strSearch = editTextSearch.getText().toString().trim();
 //                    Toast.makeText(SearchActivity.this, "Search: " + strSearch, Toast.LENGTH_SHORT).show();
-                    mCategoryAdapter = new CategoryAdapter(new MangaAdapter.IClickItemListener() {
+                    mCategoryAdapter = new CategoryAdapter(SearchActivity.this, new MangaAdapter.IClickItemListener() {
                         @Override
                         public void onClickItemManga(Manga manga) {
-                            Toast.makeText(SearchActivity.this, manga.getMangaName(), Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(SearchActivity.this, MangaDetailActivity.class);
+                            String MangaName = manga.getMangaName();
+                            intent.putExtra("MangaName", MangaName);
+                            startActivity(intent);
+//                            Toast.makeText(SearchActivity.this, manga.getMangaName(), Toast.LENGTH_SHORT).show();
                         }
                     });
                     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(SearchActivity.this, RecyclerView.VERTICAL, false);
@@ -87,16 +94,27 @@ public class SearchActivity extends AppCompatActivity {
         List<Manga> mangaList = new ArrayList<>();
         Cursor cursor = db.GetListManga();
         while (cursor.moveToNext()) {
-            if (cursor.getString(0).toUpperCase().contains(strSearch.toUpperCase())) {
-                String category = "";
-                Cursor cursor1 = db.GetListCategoryByMangaName(cursor.getString(0));
-                while (cursor1.moveToNext()) {
-                    category += cursor1.getString(0) + "   ";
+            if (cursor.getString(0).toUpperCase().contains(strSearch.toUpperCase()) || cursor.getString(1).toUpperCase().contains(strSearch.toUpperCase())) {
+                Bitmap bitmap;
+                if (cursor.getBlob(6) != null) {
+                    bitmap = covertBytesToBitmap(cursor.getBlob(6));
+                } else {
+                    bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.img_anh_mac_dinh);
                 }
-                cursor1 = db.GetChapterByMangaName(cursor.getString(0));
-                mangaList.add(new Manga(cursor.getString(0), cursor.getString(4), category, cursor1.getCount()));
+                mangaList.add(new Manga(cursor.getString(0),
+                        cursor.getString(1),
+                        Boolean.valueOf(cursor.getString(2)),
+                        cursor.getString(3),
+                        Boolean.valueOf(cursor.getString(4)),
+                        cursor.getString(5),
+                        bitmap));
             }
         }
         return mangaList;
+    }
+
+    public Bitmap covertBytesToBitmap(byte[] bytes) {
+        // byte[] --> bitmat
+        return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
     }
 }

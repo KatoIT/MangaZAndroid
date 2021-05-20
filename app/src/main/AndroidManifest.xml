@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.mangaz">
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/mangaz1"
@@ -9,8 +11,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MangaZ">
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".AdminAddMangaCategoryActivity"></activity>
+        <activity android:name=".AdminAddChapterActivity" />
+        <activity android:name=".AdminAddImageChapterActivity" />
+        <activity android:name=".AdminChapterActivity" />
+        <activity android:name=".AdminAddMangaActivity" />
+        <activity android:name=".AdminMangaActivity" />
+        <activity android:name=".MainActivity" />
         <activity android:name=".SearchActivity" />
+        <activity android:name=".ActivityRead" />
+        <activity android:name=".MangaDetailActivity" />
         <activity android:name=".signup.SignUpActivity" />
         <activity
             android:name=".login.LoginActivity"

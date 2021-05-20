@@ -9,6 +9,9 @@
 package com.example.mangaz;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,8 +25,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.mangaz.login.LoginActivity;
-import com.example.mangaz.manga.Manga;
+import com.example.mangaz.Model.Manga;
 import com.example.mangaz.nomination.Nomination;
 import com.example.mangaz.nomination.NominationAdapter;
 
@@ -34,6 +36,8 @@ public class HomeFragment extends Fragment {
 
     private RecyclerView recyclerViewHomeFragment;
     private NominationAdapter nominationAdapter;
+    private Database db;
+    private Cursor cursor;
 
 
     @Nullable
@@ -42,12 +46,17 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         // ánh xạ
         recyclerViewHomeFragment = view.findViewById(R.id.recyclerViewHomeFragment);
+        //
+        db = new Database(getActivity());
+
         nominationAdapter = new NominationAdapter(getActivity(), new NominationAdapter.IClickItem() {
             @Override
             public void onClick(Manga manga) {
                 Toast.makeText(getActivity(), manga.getMangaName(), Toast.LENGTH_SHORT).show();
-//                Intent intent = new Intent(getActivity(), LoginActivity.class);
-//                startActivity(intent);
+                Intent intent = new Intent(getActivity(), MangaDetailActivity.class);
+                String MangaName = manga.getMangaName();
+                intent.putExtra("MangaName", MangaName);
+                startActivity(intent);
 
             }
 
@@ -74,51 +83,52 @@ public class HomeFragment extends Fragment {
     private List<Nomination> getListNomination() { // truyền dữ liệu vào RecyclerView
         List<Nomination> listNominations = new ArrayList<>();
         //
-        List<Manga> mangaList = new ArrayList<>();
-        mangaList.add(new Manga("Dục hỏa độc nữ", "" + R.drawable.img_duc_hoa_doc_nu));
-        mangaList.add(new Manga("Người tôi yêu là chàng trai nào", "" + R.drawable.img_nguoi_toi_yeu_la_chang_trai_nao));
-        mangaList.add(new Manga("Chử thiên ký", "" + R.drawable.img_chu_thien_ky));
-        mangaList.add(new Manga("Ta lượm được thuộc tính ở mạt thế", "" + R.drawable.img_ta_luom_duoc_thuoc_tinh_o_mat_the));
-        mangaList.add(new Manga("Vương gia què", "" + R.drawable.img_vuong_gia_que));
+        cursor = db.GetListManga();
+        List<Manga> mangaList = GetMangaList(cursor);
         //
-        List<Manga> mangaList1 = new ArrayList<>();
-        mangaList1.add(new Manga("Người tôi yêu là chàng trai nào", "" + R.drawable.img_nguoi_toi_yeu_la_chang_trai_nao));
-        mangaList1.add(new Manga("Chử thiên ký", "" + R.drawable.img_chu_thien_ky));
-        mangaList1.add(new Manga("Ta lượm được thuộc tính ở mạt thế", "" + R.drawable.img_ta_luom_duoc_thuoc_tinh_o_mat_the));
-        mangaList1.add(new Manga("Dục hỏa độc nữ", "" + R.drawable.img_duc_hoa_doc_nu));
-        mangaList1.add(new Manga("Vương gia què", "" + R.drawable.img_vuong_gia_que));
+        cursor = db.GetListMangaNewUpdate();
+        List<Manga> mangaList1 = GetMangaList(cursor);
         //
-        List<Manga> mangaList2 = new ArrayList<>();
-        mangaList2.add(new Manga("Chử thiên ký", "" + R.drawable.img_chu_thien_ky));
-        mangaList2.add(new Manga("Ta lượm được thuộc tính ở mạt thế", "" + R.drawable.img_ta_luom_duoc_thuoc_tinh_o_mat_the));
-        mangaList2.add(new Manga("Vương gia què", "" + R.drawable.img_vuong_gia_que));
-        mangaList2.add(new Manga("Dục hỏa độc nữ", "" + R.drawable.img_duc_hoa_doc_nu));
-        mangaList2.add(new Manga("Người tôi yêu là chàng trai nào", "" + R.drawable.img_nguoi_toi_yeu_la_chang_trai_nao));
+        cursor = db.GetListMangaTopLike();
+        List<Manga> mangaList2 = GetMangaList(cursor);
         //
-        List<Manga> mangaList3 = new ArrayList<>();
-
-        mangaList3.add(new Manga("Ta lượm được thuộc tính ở mạt thế", "" + R.drawable.img_ta_luom_duoc_thuoc_tinh_o_mat_the));
-        mangaList3.add(new Manga("Vương gia què", "" + R.drawable.img_vuong_gia_que));
-        mangaList3.add(new Manga("Người tôi yêu là chàng trai nào", "" + R.drawable.img_nguoi_toi_yeu_la_chang_trai_nao));
-        mangaList3.add(new Manga("Dục hỏa độc nữ", "" + R.drawable.img_duc_hoa_doc_nu));
-        mangaList3.add(new Manga("Chử thiên ký", "" + R.drawable.img_chu_thien_ky));
+        cursor = db.GetListMangaTopView();
+        List<Manga> mangaList3 = GetMangaList(cursor);
         //
-        List<Manga> mangaList4 = new ArrayList<>();
+        cursor = db.GetListMangaTopFollow();
+        List<Manga> mangaList4 = GetMangaList(cursor);
+        //
+        cursor = db.GetListMangaTopComment();
+        List<Manga> mangaList5 = GetMangaList(cursor);
 
-        mangaList4.add(new Manga("Vương gia què", "" + R.drawable.img_vuong_gia_que));
-        mangaList4.add(new Manga("Người tôi yêu là chàng trai nào", "" + R.drawable.img_nguoi_toi_yeu_la_chang_trai_nao));
-        mangaList4.add(new Manga("Chử thiên ký", "" + R.drawable.img_chu_thien_ky));
-        mangaList4.add(new Manga("Ta lượm được thuộc tính ở mạt thế", "" + R.drawable.img_ta_luom_duoc_thuoc_tinh_o_mat_the));
-        mangaList4.add(new Manga("Dục hỏa độc nữ", "" + R.drawable.img_duc_hoa_doc_nu));
-
-
-        listNominations.add(new Nomination(mangaList, "Mới cập nhật", 2));
+        listNominations.add(new Nomination(mangaList, " ", 2));
         listNominations.add(new Nomination(mangaList1, "Mới cập nhật", 1));
-        listNominations.add(new Nomination(mangaList2, "Hot", 1));
-        listNominations.add(new Nomination(mangaList3, "Top tuần", 1));
-        listNominations.add(new Nomination(mangaList4, "Top tháng", 1));
-        listNominations.add(new Nomination(mangaList, "Top lượt xem", 1));
+        listNominations.add(new Nomination(mangaList2, "Được yêu thích nhất", 1));
+        listNominations.add(new Nomination(mangaList3, "Nhiều lượt xem nhất", 1));
+        listNominations.add(new Nomination(mangaList4, "Nhiều người theo dõi nhất", 1));
+        listNominations.add(new Nomination(mangaList5, "Nhiều bình luận nhất", 1));
         return listNominations;
+    }
+
+    public List<Manga> GetMangaList(Cursor c) {
+        List<Manga> mangaList = new ArrayList<>();
+        String mName = " ";
+        while (c.moveToNext()) {
+            if (!mName.equals(c.getString(0))) {
+                mName = c.getString(0);
+                mangaList.add(db.GetManga(mName));
+                if (mangaList.size() > 4) {
+                    break;
+                }
+            }
+
+        }
+        return mangaList;
+    }
+
+    public Bitmap covertBytesToBitmap(byte[] bytes) {
+        // byte[] --> bitmat
+        return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
     }
 
 

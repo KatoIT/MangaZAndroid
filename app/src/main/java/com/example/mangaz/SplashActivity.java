@@ -32,7 +32,7 @@ public class SplashActivity extends AppCompatActivity {
                 startActi(MainActivity.class);
                 finish();
             }
-        }, 2000);
+        }, 200);
     }
 
     private void startActi(Class<?> aClass) {

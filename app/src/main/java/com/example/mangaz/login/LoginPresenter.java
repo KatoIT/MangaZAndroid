@@ -13,7 +13,7 @@ import android.database.Cursor;
 import com.example.mangaz.Database;
 import com.example.mangaz.MD5;
 import com.example.mangaz.MangaZSharedPreferences;
-import com.example.mangaz.User.Users;
+import com.example.mangaz.Model.User;
 import com.example.mangaz.VarFinal;
 
 public class LoginPresenter {
@@ -28,7 +28,7 @@ public class LoginPresenter {
         this.mContext = mContext;
     }
 
-    public void Login(Users user) {
+    public void Login(User user) {
         if (!(user.ísValidUserName() && user.ísValidPassWord() && CheckUserLogin(user))) {
             mLoginInterface.LoginError("Not");
         }else {
@@ -44,7 +44,7 @@ public class LoginPresenter {
         }
     }
 
-    public Boolean CheckUserLogin(Users user) {
+    public Boolean CheckUserLogin(User user) {
         try {
             Database db = new Database(mContext);
             Cursor cursor = db.GetData("SELECT UserName, Password  FROM Users WHERE UserName = '" + user.getUserName() + "'");
